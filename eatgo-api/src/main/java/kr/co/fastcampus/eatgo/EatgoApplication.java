@@ -9,4 +9,6 @@ public class EatgoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EatgoApplication.class, args);
 	}
+
+	
 }
