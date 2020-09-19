@@ -1,5 +1,7 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
+import kr.co.fastcampus.eatgo.domain.MenuItemRepositoryImpl;
+import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
 import kr.co.fastcampus.eatgo.domain.RestaurantRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class RestaurantControllerTests {
 
     @SpyBean(RestaurantRepositoryImpl.class)
     private RestaurantRepositoryImpl restaurantRepository;
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepositoryImpl menuItemrepository;
     @Test
     public void list() throws Exception {
         mvc.perform(get("/restaurants"))
@@ -30,7 +34,8 @@ public class RestaurantControllerTests {
     public void detail() throws Exception {
         mvc.perform(get("/restaurant/1004")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"id\":1004")))
-                .andExpect(content().string(containsString("\"name\":\"BOB ZIP\"")));
+                .andExpect(content().string(containsString("\"name\":\"BOB ZIP\"")))
+                .andExpect(content().string(containsString("Kimchi")));
 
         mvc.perform(get("/restaurant/2020")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("\"id\":2020")))
